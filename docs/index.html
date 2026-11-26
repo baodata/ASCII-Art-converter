@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASCII Art Converter — Lữ Bảo Đạt</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Interactive mouse glow tracking -->
@@ -15,15 +16,9 @@
 
   <!-- Navigation top bar -->
   <header class="top-bar">
-    <a href="#" class="brand">
-      <span class="brand-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="4 7 4 4 20 4 20 7"></polyline>
-          <line x1="9" y1="20" x2="15" y2="20"></line>
-          <line x1="12" y1="4" x2="12" y2="20"></line>
-        </svg>
-      </span>
-      <span>ASCII<span class="accent">Art</span></span>
+    <a href="https://baodata.github.io/" class="logo">
+      <img src="assets/images/logo.png" alt="Logo" class="logo-icon">
+      <span>Lữ Bảo<span class="accent-word">Đạt</span></span>
     </a>
 
     <nav class="nav-links">
@@ -45,13 +40,6 @@
 
   <!-- Main container -->
   <main class="app-container">
-    <!-- Header banner -->
-    <div class="app-header">
-      <h1 class="app-title">Image to <span class="highlight">ASCII Art</span></h1>
-      <p class="app-subtitle">
-        High-fidelity character mapping powered by ITU-R BT.601 luminance & aspect-ratio font correction.
-      </p>
-    </div>
 
     <!-- Workspace grid -->
     <div class="workspace-grid">
@@ -211,11 +199,6 @@
 
   <!-- Hidden canvas for pixel extraction -->
   <canvas id="hidden-canvas" style="display: none;"></canvas>
-
-  <!-- Footer -->
-  <footer class="app-footer">
-    <p>ASCII Art Converter &copy; 2026 <a href="https://baodata.github.io/">Lữ Bảo Đạt</a>. Built with Vanilla JS & HTML5 Canvas.</p>
-  </footer>
 
   <script src="js/glow.js"></script>
   <script src="js/app.js"></script>

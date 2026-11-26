@@ -1,18 +1,22 @@
 :root {
   --bg-primary: #0b0f0e;
-  --surface-glass: rgba(18, 26, 23, 0.85);
+  --surface-glass: rgba(11, 15, 14, 0.75);
   --surface-card: rgba(255, 255, 255, 0.035);
   --surface-card-hover: rgba(16, 185, 129, 0.06);
   --accent-green: #10b981;
-  --accent-glow: rgba(16, 185, 129, 0.3);
-  --border-subtle: rgba(255, 255, 255, 0.08);
+  --accent-green-dark: #059669;
+  --accent-green-glow: rgba(16, 185, 129, 0.18);
+  --accent-green-subtle: rgba(5, 150, 105, 0.05);
+  --border-subtle: rgba(255, 255, 255, 0.07);
   --border-glass: rgba(16, 185, 129, 0.3);
   --border-hover: rgba(16, 185, 129, 0.6);
   --text-primary: #f8fafc;
   --text-muted: #94a3b8;
   --text-faint: #64748b;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --mouse-x: -1000px;
+  --mouse-y: -1000px;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 * {
@@ -32,19 +36,18 @@ body {
   position: relative;
 }
 
-/* Mouse glow cursor */
+/* Interactive green mouse glow - identical to baodata.github.io */
 .mouse-glow {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 480px;
-  height: 480px;
-  border-radius: 50%;
+  inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.03) 45%, transparent 70%);
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
-  z-index: 0;
+  background: radial-gradient(
+    500px circle at var(--mouse-x) var(--mouse-y),
+    var(--accent-green-glow),
+    var(--accent-green-subtle) 40%,
+    transparent 70%
+  );
+  z-index: 1;
 }
 
 /* Header */
@@ -65,59 +68,69 @@ body {
   z-index: 50;
 }
 
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
+/* Logo styling - identical to baodata.github.io */
+.logo {
   font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  letter-spacing: -0.02em;
-}
-
-.brand-icon {
+  color: var(--text-primary);
+  user-select: none;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--accent-green);
+  gap: 0.65rem;
+  transition: opacity 0.2s ease;
 }
 
-.accent {
-  color: var(--accent-green);
+.logo:hover {
+  opacity: 0.9;
+}
+
+.logo-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  border-radius: 6px;
+  filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.3));
+}
+
+.logo .accent-word {
+  color: var(--accent-green-dark);
+  margin-left: 0.28rem;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.75rem;
 }
 
 .nav-link {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text-primary);
   text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 0.42rem 1.1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  transition: all 0.25s ease;
+  user-select: none;
 }
 
 .nav-link:hover {
-  color: var(--accent-green);
+  color: #ffffff;
+  border-color: var(--accent-green);
+  background: rgba(16, 185, 129, 0.15);
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.25);
+  transform: translateY(-1px);
 }
 
-.nav-back {
-  padding: 0.4rem 0.85rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
-}
-
-.nav-back:hover {
-  border-color: var(--border-glass);
-  background: rgba(16, 185, 129, 0.08);
+.nav-github {
+  padding: 0.42rem 0.65rem;
 }
 
 /* App container */
@@ -125,10 +138,10 @@ body {
   max-width: 1380px;
   width: 100%;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem;
+  padding: 2.5rem 1.5rem 3.5rem 1.5rem;
   flex: 1;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .app-header {
@@ -137,22 +150,27 @@ body {
 }
 
 .app-title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.6rem;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
 }
 
 .app-title .highlight {
-  color: var(--accent-green);
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #ffffff 40%, var(--accent-green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .app-subtitle {
   color: var(--text-muted);
-  font-size: 1.05rem;
+  font-size: 1.125rem;
   max-width: 680px;
   margin: 0 auto;
-  line-height: 1.5;
+  line-height: 1.75;
 }
 
 /* Grid layout */
@@ -181,8 +199,9 @@ body {
 }
 
 .card-title {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
   margin-bottom: 1.15rem;
   color: var(--text-primary);
   display: flex;
@@ -539,25 +558,6 @@ body {
 .empty-state p {
   font-size: 0.9rem;
   line-height: 1.5;
-}
-
-/* Footer */
-.app-footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  font-size: 0.85rem;
-  color: var(--text-faint);
-  border-top: 1px solid var(--border-subtle);
-  background: var(--bg-primary);
-}
-
-.app-footer a {
-  color: var(--accent-green);
-  text-decoration: none;
-}
-
-.app-footer a:hover {
-  text-decoration: underline;
 }
 
 /* Responsive */
